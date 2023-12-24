@@ -3,7 +3,6 @@ from torch.nn import Conv2d
 from torch.nn import Linear
 from torch.nn import MaxPool2d
 from torch.nn import ReLU
-from torch.nn import Sigmoid
 from torch import flatten
 
 class LeNet(Module):
@@ -21,12 +20,10 @@ class LeNet(Module):
         self.relu2 = ReLU()
         self.maxpool2 = MaxPool2d(kernel_size=(2, 2), stride=(2, 2))
         # initialize first (and only) set of FC => RELU layers
-        # 744200?
         self.fc1 = Linear(in_features=800, out_features=500)
         self.relu3 = ReLU()
         # initialize our softmax classifier
         self.fc2 = Linear(in_features=500, out_features=classes)
-        # self.sigmoid = Sigmoid()
     def forward(self, x):
         # pass the input through our first set of CONV => RELU =>
         # POOL layers
@@ -46,6 +43,5 @@ class LeNet(Module):
         # pass the output to our softmax classifier to get our output
         # predictions
         x = self.fc2(x)
-        # output = self.sigmoid(x)
         # return the output predictions
         return x
